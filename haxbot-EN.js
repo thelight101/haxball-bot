@@ -1,7 +1,7 @@
 /* ROOM */
-const roomName = "Enter the name of your room";
-const botName = "Judge";
-const maxPlayers = 24; // maximum number of players in the room
+const roomName = "https://www.twitch.tv/thelight101";
+const botName = "Yayındayız Gelin";
+const maxPlayers = 10; // maximum number of players in the room
 const roomPublic = true; // true = public room | false = players only enter via the room link (it does not appear in the room list)
 const geo = [{"lat": -22.9201, "lon": -43.3307, "code": "br"}, {"code": "FR", "lat": 46.2, "lon": 2.2}, {"code": "PL", "lat": 51.9, "lon": 19.1}, {"code": "GB", "lat": 55.3, "lon": -3.4}, {"code": "PT", "lat": 39.3, "lon": -8.2}]; 
 // place your geoloc, so as not to have a leaky room
@@ -4219,7 +4219,7 @@ room.onPlayerChat = function(player, message) {
         room.sendAnnouncement("                                        ▒█▀▀▄ ▀█▀ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▄ ", null, 0x9250FD, 'bold')
         room.sendAnnouncement("                                        ▒█░▒█ ▒█░ ░▀▀▀▄▄ ▒█░░░ ▒█░░▒█ ▒█▄▄▀ ▒█░▒█ ", null, 0x8466FD, 'bold')
         room.sendAnnouncement("                                        ▒█▄▄▀ ▄█▄ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█▄▄▀ ", null, 0x7B73FD, 'bold');
-        room.sendAnnouncement("                                        💬 Discord Link: ➡ https://discord.gg/ ⬅", null, 0xF6FF43, 'bold');
+        room.sendAnnouncement("                                        💬 Discord Link: ➡ https://discord.gg/SEPNavmnZe ⬅", null, 0xF6FF43, 'bold');
     }
  
     if (xingo.includes(message[0])) {
@@ -4728,10 +4728,6 @@ room.onGameTick = function() {
     handleInactivity();
 }
 
-Botdivulga = setInterval(function() {
-    room.sendAnnouncement("Do you want to create a room, but don't know how to program? We have the solution ☝️🤓", null, 0x5EE7FF, "bold");
-    room.sendAnnouncement("If you like it, consider leaving a ⭐ in our repository\n➡ https://github.com/theosanct0s/haxball-bot", null, 0xFFFFFF, "bold");
-}, BotdivulgaTime);
 
 msg1 = setInterval(function() {
     room.sendAnnouncement("Here we just play for fun, if you want to be competitive, go to another room!", null, 0xff8a4a, "normal");
