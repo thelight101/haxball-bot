@@ -1,7 +1,7 @@
 /* ROOM */
-const roomName = "Enter the name of your room";
-const botName = "Judge";
-const maxPlayers = 24; // maximum number of players in the room
+const roomName = "📺🔴Twitch Yayındayız";
+const botName = "Bot 101";
+const maxPlayers = 15; // maximum number of players in the room
 const roomPublic = true; // true = public room | false = players only enter via the room link (it does not appear in the room list)
 const geo = [{"lat": -22.9201, "lon": -43.3307, "code": "br"}, {"code": "FR", "lat": 46.2, "lon": 2.2}, {"code": "PL", "lat": 51.9, "lon": 19.1}, {"code": "GB", "lat": 55.3, "lon": -3.4}, {"code": "PT", "lat": 39.3, "lon": -8.2}]; 
 // place your geoloc, so as not to have a leaky room
@@ -58,33 +58,36 @@ let Cor = {
     Azulescuro: 0x426AD6,
     Warn: 0xff9966
         }
-    // here you can place/edit goal messages, always respecting the " , ". Example: "Belo gooool," the player's name will always be after the comma.     
-    const frasesGols = [" WHAT A GOAL IS THAT, LADIES AND GENTLEMEN! You are a legend, ",
-        " GOOOOOOOOOOL! THE WORLD NEEDS MORE LIKE YOU, ",
-        " Look at this goal from ",
-        " IT'S GOOOOOL from ",
-        " What a great goal from ",
-        " GOOOOOOOOOOL! SHOWING UP WHEN WE NEED IT MOST, THANKS TO ",
-        " MY GOODNESS!!!! THE IMPOSSIBLE HAPPENED MY GOD IN HEAVEN, IT’S A GOAL FOR YOU ",
-        " WHAT A GOAL FROM ",
-        " Impressive completion of the ",
-        " Sorry for the insults, BUT HOLY SHIT, WHAT A GOAL IS THAT, ",
-        " IT'S CASH, IT'S CASH, IT'S CASH, IT'S GOOOOOOOOOL FROM "
-    ];
-    // here you can place/edit assistance messages, always respecting the " , ". Example: "Nice pass," the player's name will always be after the comma.
-    const frasesasis = [" with the beautiful of ",
-        " accompanied by the beautiful pass of ",
-        " with the ball in the mouth of the goal by ",
-        " with the phenomenal assistance of ",
-        " and we cannot forget the magnificent pass of"
-    ];
-    // here you can post/edit messages for mockery, for own goals, always respecting the " , ". Example: "Try to kick to the other side," the player's name will always be after the comma.
-    const frasesautogol = [" I'm sure it was by accident, right, ",
-        " YOU'RE PLAYING FOR THE WRONG TEAM, ",
-        " CONGRATULATIONS!! THE OPPONENT TEAM THANKS YOU, ",
-        " IT'S GOOOOOOOOOL... against ",
-        " Return to the sea offering, "
-    ];
+    // burada gol mesajlarını ekleyebilir/düzenleyebilirsiniz, her zaman virgülden sonra oyuncunun isminin geleceğini unutmayın. Örnek: "Harika gooool," oyuncunun adı her zaman virgülden sonra gelir.
+const frasesGols = [" NE GOL AMA, HANIMEFENDİLER VE BEYEFENDİLER! Sen bir efsanesin, ",
+    " GOOOOOOOOL! DÜNYA SENİN GİBİLERİNE DAHA ÇOK İHTİYAÇ DUYUYOR, ",
+    " Şu gole bir bakın, ",
+    " GOOOOOOL GELİYOR, ",
+    " Ne harika bir gol, ",
+    " GOOOOOOL! EN ÇOK İHTİYACIMIZ OLDUĞU ANDA ORTAYA ÇIKTIN, TEŞEKKÜRLER ",
+    " TANRIM! İMKANSIZ GERÇEKLEŞTİ, TANRIM CENNETTE BU GOL SENİN İÇİN ",
+    " NE GOL AMA, ",
+    " İnanılmaz bir tamamlama, ",
+    " Küfürler için özür dilerim, AMA BU NASIL BİR GOL, ",
+    " BU NAKİTTİR, NAKİTTİR, NAKİTTİR, GOOOOOOL GELİYOR, "
+];
+
+// burada asist mesajlarını ekleyebilir/düzenleyebilirsiniz, her zaman virgülden sonra oyuncunun isminin geleceğini unutmayın. Örnek: "Güzel pas," oyuncunun adı her zaman virgülden sonra gelir.
+const frasesasis = [" harika pas ile ",
+    " muhteşem pas eşliğinde ",
+    " gol ağzına kadar getirilen top ile ",
+    " fenomenal bir asist ile ",
+    " ve muhteşem pası da unutmayalım"
+];
+
+// burada kendi kalesine atılan goller için alay mesajlarını ekleyebilir/düzenleyebilirsiniz, her zaman virgülden sonra oyuncunun isminin geleceğini unutmayın. Örnek: "Diğer tarafa vurmaya çalış," oyuncunun adı her zaman virgülden sonra gelir.
+const frasesautogol = [" Eminim kazara oldu, değil mi, ",
+    " YANLIŞ TAKIMA OYNUYORSUN, ",
+    " TEBRİKLER!! RAKİP TAKIM SANA MİNNETTAR, ",
+    " GOOOOOOOL... kendi kalesine karşı, ",
+    " Denize adak olsun, "
+];
+
 
 const secondsToResetAvatar = 3;
 var registro = new Map();
@@ -2706,8 +2709,8 @@ function checkTime() {
         goldenGoal = true;
        // room.sendAnnouncement("⚽ Gol de Gold!", null, 0xF1AF09);
         room.sendAnnouncement(centerText("PROLONGATION"), null, Cor.Amarelo, "bold");
-        room.sendAnnouncement(centerText("I'll give " + drawTimeLimit * 60 + " seconds!"), null, Cor.White, "normal");
-        room.sendAnnouncement(centerText("⚽ First goal wins! ⚽"), null, Cor.White, "normal");
+        room.sendAnnouncement(centerText("Uzatma: " + drawTimeLimit * 60 + " seconds!"), null, Cor.White, "normal");
+        room.sendAnnouncement(centerText("⚽ Altın Gol! ⚽"), null, Cor.White, "normal");
     }
     if (scores.time > scores.timeLimit + drawTimeLimit * 60 - 15 && scores.time <= scores.timeLimit + drawTimeLimit * 60) {
         if (checkTimeVariable == false && announced == false) {
@@ -2740,11 +2743,11 @@ function endGame(winner) { // lida com o final de um jogo: nenhuma função stop
     endGameVariable = true;
     if (winner == Team.RED) {
         streak++;
-        room.sendAnnouncement(centerText("🏆 Red team won! | Win Streak(s):") + streak + " 🏆", null, 0xFDC43A);
+        room.sendAnnouncement(centerText("🏆 Kırmızı Takım Kazandı! | Kazanma Serisi(s):") + streak + " 🏆", null, 0xFDC43A);
     }
     else if (winner == Team.BLUE) {
         streak = 1;
-        room.sendAnnouncement(centerText("🏆 Blue team won! | Win streak(s):") + streak + " 🏆", null, 0xFDC43A);
+        room.sendAnnouncement(centerText("🏆 Mavi Takım Kazandı! | Kazanma Serisi(s):") + streak + " 🏆", null, 0xFDC43A);
     }
     else {
         streak = 0;
@@ -2754,7 +2757,7 @@ function endGame(winner) { // lida com o final de um jogo: nenhuma função stop
     room.sendAnnouncement(centerText("🏆 END OF MATCH 🏆"), null, Cor.White, "bold");
     room.sendAnnouncement(centerText(" " + scores.red + " - " + scores.blue), null, Cor.White, "normal");
     room.sendAnnouncement(centerText((Rposs * 100).toPrecision(3).toString() + "% | Ball possession | " + (Bposs * 100).toPrecision(3).toString() + "% "), null, Cor.White, "normal");
-    scores.red == 0 ? (scores.blue == 0 ? room.sendAnnouncement("🥅 " + GKList[0].name + " it's a man? no, it's a barrier! " + GKList[1].name + " saved all goals ", null, 0xFDC43A) : room.sendAnnouncement("🥅 it's a man? no, it's a barrier! " + GKList[1].name + " saved all goals ", null, 0xFDC43A)) : scores.blue == 0 ? room.sendAnnouncement("🥅 it's a man? no, it's a barrier! " + GKList[0].name + " saved all goals ", null, 0xFDC43A) : null;
+    scores.red == 0 ? (scores.blue == 0 ? room.sendAnnouncement("🥅 " + GKList[0].name + " Kaleci ❌ Duvar ✅ " + GKList[1].name + " saved all goals ", null, 0xFDC43A) : room.sendAnnouncement("🥅 Kaleci ❌ Duvar ✅ " + GKList[1].name + " Cs Kazandı ", null, 0xFDC43A)) : scores.blue == 0 ? room.sendAnnouncement("🥅 Kaleci ❌ Duvar ✅ " + GKList[0].name + " Cs Kazandı ", null, 0xFDC43A) : null;
     updateStats();
     //sendDiscordWebhook(scores);
     //room.sendAnnouncement("A partida foi gravada e enviada em nosso discord. ID: " + `${getDate()}`, null, Cor.Amrelo, Negrito);
@@ -2798,7 +2801,7 @@ function loadMap(map, scoreLim, timeLim) {
     if (map != '') {
         room.setCustomStadium(map);
     } else {
-        console.log("There was an error loading the stadium")
+        console.log("Stadium ile ilgili bir problem var")
         room.setDefaultStadium("Classic");
     }
     room.setScoreLimit(scoreLim);
@@ -2825,7 +2828,7 @@ function handleInactivity() { // handles inactivity: players will be kicked afte
     }
     for (var i = 0; i < extendedP.length; i++) {
         if (extendedP[i][eP.ACT] == 60 * (2 / 3 * afkLimit)) {
-            room.sendAnnouncement("@" + room.getPlayer(extendedP[i][eP.ID]).name + ", if you don't move in the next " + Math.floor(afkLimit / 3) + " seconds, you will be kicked!", extendedP[i][eP.ID], 0xf4a404, "bold", 2);
+            room.sendAnnouncement("@" + room.getPlayer(extendedP[i][eP.ID]).name + ", eğer hareket etmezsen " + Math.floor(afkLimit / 3) + " saniye sonra atılacaksın!", extendedP[i][eP.ID], 0xf4a404, "bold", 2);
         }
         if (extendedP[i][eP.ACT] >= 60 * afkLimit) {
             extendedP[i][eP.ACT] = 0;
@@ -2897,7 +2900,7 @@ function updateRoleOnPlayerOut() {
                 if (scores.blue - scores.red == 2) {
                     endGame(Team.BLUE);
                    // room.sendChat("🤖 Ragequit 🤖");
-                    room.sendAnnouncement("[Juiz] Ragequit by the red team detected, match over!", null, 0xbfff00, "normal");
+                    room.sendAnnouncement("[Juiz] Kırmızı takımda Ragequit atıldı ve maç bitti!", null, 0xbfff00, "normal");
                     setTimeout(() => {
                         room.stopGame();
                     }, 100);
@@ -2907,7 +2910,7 @@ function updateRoleOnPlayerOut() {
                 if (scores.red - scores.blue == 2) {
                     endGame(Team.RED);
                    // room.sendChat("🤖 Ragequit 🤖");
-                    room.sendAnnouncement("[Juiz] Ragequit by the blue team detected, match over!", null, 0xbfff00, "normal");
+                    room.sendAnnouncement("[Juiz] Mavi takımda Ragequit atıldı ve maç bitti!", null, 0xbfff00, "normal");
                     setTimeout(() => {
                         room.stopGame();
                     }, 100);
@@ -2926,7 +2929,7 @@ function updateRoleOnPlayerOut() {
         }
         if (Math.abs(TeamR.length - TeamB.length) == teamS.length) {
             // room.sendChat("Sem alternativas, deixe me lidar com essa situação. ...");
-            room.sendAnnouncement("[Juiz] With no possibility of recruitment, let me decide...", null, 0xc0bdb1, "normal");
+            room.sendAnnouncement("[Juiz] Seçemedin, bana bırak...", null, 0xc0bdb1, "normal");
             deactivateChooseMode();
             resumeGame();
             var b = teamS.length;
@@ -2948,7 +2951,7 @@ function updateRoleOnPlayerOut() {
         if (streak == 0 && room.getScores() == null) {
             if (Math.abs(TeamR.length - TeamB.length) == 2) { // if someone leaves an already formed team, thus leaving 2 players, put the last one chosen back to the spectators so that it is fair
               // room.sendChat("🤖 Equilibrando equipes... 🤖");
-                room.sendAnnouncement("Balancing teams...", null, 0xc0bdb1, "normal");
+                room.sendAnnouncement("Takımları eşitliyorum...", null, 0xc0bdb1, "normal");
                 TeamR.length > TeamB.length ? room.setPlayerTeam(TeamR[TeamR.length - 1].id, Team.SPECTATORS) : room.setPlayerTeam(TeamB[TeamB.length - 1].id, Team.SPECTATORS);
             }
         }
@@ -3024,7 +3027,7 @@ function choosePlayer() {
     if (TeamR.length <= TeamB.length && TeamR.length != 0) {
         room.sendAnnouncement("[Juiz] To choose a player, enter their roster number or use 'top', 'random' o 'bottom'.", TeamR[0].id, 0x5db5db, "normal");
         timeOutCap = setTimeout(function(player) {
-            room.sendAnnouncement("Be quick, @" + player.name + ", only remain " + Number.parseInt(chooseTime / 2) + " seconds for you to choose!", player.id, 0xf2a000, "normal");
+            room.sendAnnouncement("Hızlı Ol, @" + player.name + ", seçmek için sadece " + Number.parseInt(chooseTime / 2) + " saniye kaldı!", player.id, 0xf2a000, "normal");
             timeOutCap = setTimeout(function(player) {
                 room.kickPlayer(player.id, "Didn't choose in time", false);
             }, chooseTime * 500, TeamR[0]);
@@ -3032,9 +3035,9 @@ function choosePlayer() {
     } else if (TeamB.length < TeamR.length && TeamB.length != 0) {
         room.sendAnnouncement("[Juiz] To choose a player, enter their roster number or use 'top', 'random' o 'bottom'.", TeamB[0].id, 0x5db5db, "normal");
         timeOutCap = setTimeout(function(player) {
-            room.sendAnnouncement("Be quick, @" + player.name + ", only remain " + Number.parseInt(chooseTime / 2) + " seconds for you to choose!", player.id, 0xf2a000, "normal");
+            room.sendAnnouncement("Hızlı Ol, @" + player.name + ", seçmek için sadece " + Number.parseInt(chooseTime / 2) + " saniye kaldı!", player.id, 0xf2a000, "normal");
             timeOutCap = setTimeout(function(player) {
-                room.kickPlayer(player.id, "Didn't choose in time", false);
+                room.kickPlayer(player.id, "Zamanında seçemedin", false);
             }, chooseTime * 500, TeamB[0]);
         }, chooseTime * 1000, TeamB[0]);
     }
@@ -4219,7 +4222,7 @@ room.onPlayerChat = function(player, message) {
         room.sendAnnouncement("                                        ▒█▀▀▄ ▀█▀ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▄ ", null, 0x9250FD, 'bold')
         room.sendAnnouncement("                                        ▒█░▒█ ▒█░ ░▀▀▀▄▄ ▒█░░░ ▒█░░▒█ ▒█▄▄▀ ▒█░▒█ ", null, 0x8466FD, 'bold')
         room.sendAnnouncement("                                        ▒█▄▄▀ ▄█▄ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█▄▄▀ ", null, 0x7B73FD, 'bold');
-        room.sendAnnouncement("                                        💬 Discord Link: ➡ https://discord.gg/ ⬅", null, 0xF6FF43, 'bold');
+        room.sendAnnouncement("                                        💬 Discord Link: ➡ https://discord.gg/SEPNavmnZe ⬅", null, 0xF6FF43, 'bold');
     }
  
     if (xingo.includes(message[0])) {
@@ -4328,24 +4331,24 @@ room.onPlayerChat = function(player, message) {
                     room.setPlayerTeam(teamS[0].id, Team.RED);
                     redCaptainChoice = "top";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose first from the list!", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki ilk kişi seçiliyor", null, 0x55bae2, "normal");
                     return false;
                 } else if (["random", "rand"].includes(message[0].toLowerCase())) {
                     var r = getRandomInt(teamS.length);
                     room.setPlayerTeam(teamS[r].id, Team.RED);
                     redCaptainChoice = "random";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose a random team", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki random kişi seçiliyor", null, 0x55bae2, "normal");
                     return false;
                 } else if (["bottom", "bot"].includes(message[0].toLowerCase())) {
                     room.setPlayerTeam(teamS[teamS.length - 1].id, Team.RED);
                     redCaptainChoice = "bottom";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose the last one on the list!", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki son kişi seçiliyor", null, 0x55bae2, "normal");
                     return false;
                 } else if (!Number.isNaN(Number.parseInt(message[0]))) {
                     if (Number.parseInt(message[0]) > teamS.length || Number.parseInt(message[0]) < 1) {
-                        room.sendAnnouncement("[⚠️] Oops! The number you chose is invalid.", player.id, null, 0xfaca29, "normal");
+                        room.sendAnnouncement("[⚠️] Yanlış bir sayı yazdın.", player.id, null, 0xfaca29, "normal");
                         return false;
                     } else {
                         room.setPlayerTeam(teamS[Number.parseInt(message[0]) - 1].id, Team.RED);
@@ -4359,23 +4362,23 @@ room.onPlayerChat = function(player, message) {
                     room.setPlayerTeam(teamS[0].id, Team.BLUE);
                     blueCaptainChoice = "top";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose first from the list!", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki ilk kişi seçiliyor!", null, 0x55bae2, "normal");
                     return false;
                 } else if (["random", "rand"].includes(message[0].toLowerCase())) {
                     room.setPlayerTeam(teamS[getRandomInt(teamS.length)].id, Team.BLUE);
                     blueCaptainChoice = "random";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose a random team", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki random kişi seçiliyor", null, 0x55bae2, "normal");
                     return false;
                 } else if (["bottom", "bot"].includes(message[0].toLowerCase())) {
                     room.setPlayerTeam(teamS[teamS.length - 1].id, Team.BLUE);
                     blueCaptainChoice = "bottom";
                     clearTimeout(timeOutCap);
-                    room.sendAnnouncement(player.name + " chose the last one on the list!", null, 0x55bae2, "normal");
+                    room.sendAnnouncement(player.name + " Listedeki son kişi seçiliyor", null, 0x55bae2, "normal");
                     return false;
                 } else if (!Number.isNaN(Number.parseInt(message[0]))) {
                     if (Number.parseInt(message[0]) > teamS.length || Number.parseInt(message[0]) < 1) {
-                        room.sendAnnouncement("[⚠️] Oops! The number you chose is invalid.", player.id, null, 0xfaca29, "normal");
+                        room.sendAnnouncement("[⚠️] Oops! Yanlış bir sayı yazdın.", player.id, null, 0xfaca29, "normal");
                         return false;
                     } else {
                         room.setPlayerTeam(teamS[Number.parseInt(message[0]) - 1].id, Team.BLUE);
@@ -4502,10 +4505,10 @@ room.onGameStart = function(byPlayer) {
     GKList = [];
     allReds = [];
     allBlues = [];
-    room.sendAnnouncement(centerText("🥅 MATCH STARTING 🥅"), null, Cor.White, "bold");
-    room.sendAnnouncement(centerText("Want to change your uniform? Type '!uni'"), null, 0x2EF55D, "bold");
-    room.sendAnnouncement(centerText("For exclusive uniforms, use '!uni2'"), null, 0xFFAE00, "bold");
-    room.sendAnnouncement(centerText("[💬] Use 't' before the message to chat with your team!"), null, 0x5EE7FF);
+    room.sendAnnouncement(centerText("🥅 MAÇ BAŞLIYOR 🥅"), null, Cor.White, "bold");
+    room.sendAnnouncement(centerText("Forma mı değiştirmek istiyorsun? Yaz '!uni'"), null, 0x2EF55D, "bold");
+    room.sendAnnouncement(centerText("Ek formalar için, yaz '!uni2'"), null, 0xFFAE00, "bold");
+    room.sendAnnouncement(centerText("[💬] 't' yaz takımla konuşmak için!"), null, 0x5EE7FF);
     if (TeamR.length == maxTeamSize && TeamB.length == maxTeamSize) {
         for (var i = 0; i < maxTeamSize; i++) {
             allReds.push(TeamR[i]);
@@ -4633,18 +4636,18 @@ room.onTeamGoal = function(team) {
 			var frasegol = frasesGols[(Math.random() * frasesGols.length) | 0]
 			var fraseasis = frasesasis[(Math.random() * frasesasis.length) | 0]
 		//	room.sendAnnouncement("⚽👥 " + getTime(scores) + frasegol + lastPlayersTouched[0].name + fraseasis + lastPlayersTouched[1].name + " | Velocidade do chute: " + ballSpeed.toPrecision(4).toString() + "km/h " + (team == Team.RED ? "🔴" : "🔵"),null,(team == Team.RED ? Cor.Vermelho : 0x5ec0f1),'bold');
-            room.sendAnnouncement(centerText("PLAY THE MUSIC, IT’S GOOOOOL!!!"), null, Cor.Verde, "bold");
-            room.sendAnnouncement(centerText("         ⚽ Goal from " + lastPlayersTouched[0].name + " ⚽"), null, Cor.White, "bold");
-            room.sendAnnouncement(centerText("👟 Assistance: " + lastPlayersTouched[1].name + " 👟"), null, Cor.White, "bold");
-            room.sendAnnouncement(centerText("Kick speed: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
+            room.sendAnnouncement(centerText("İnanılmaz!!!"), null, Cor.Verde, "bold");
+            room.sendAnnouncement(centerText("         ⚽ Goal Geldi " + lastPlayersTouched[0].name + " ⚽"), null, Cor.White, "bold");
+            room.sendAnnouncement(centerText("👟 Asist: " + lastPlayersTouched[1].name + " 👟"), null, Cor.White, "bold");
+            room.sendAnnouncement(centerText("Şut hızı: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
             game.goals.push(new Goal(scores.time, team, lastPlayersTouched[0], lastPlayersTouched[1]));
 			}
 			else {
 				var frasegol = frasesGols[(Math.random() * frasesGols.length) | 0]
 			///	room.sendAnnouncement("⚽ " + getTime(scores) + frasegol + lastPlayersTouched[0].name + "! | Velocidade do chute: " + ballSpeed.toPrecision(4).toString() + "km/h " + (team == Team.RED ? "🔴" : "🔵"),null,(team == Team.RED ? Cor.Vermelho : 0x5ec0f1),'bold');
                 room.sendAnnouncement(centerText("PLAY THE MUSIC, IT’S GOOOOOL!!!"), null, Cor.Verde, "bold");
-                room.sendAnnouncement(centerText("         ⚽ Goal from " + lastPlayersTouched[0].name + " ⚽"), null, Cor.White, "bold");
-                room.sendAnnouncement(centerText("Kick speed: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
+                room.sendAnnouncement(centerText("         ⚽ Gol geldi " + lastPlayersTouched[0].name + " ⚽"), null, Cor.White, "bold");
+                room.sendAnnouncement(centerText("Şut hızı: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
                 game.goals.push(new Goal(scores.time, team, lastPlayersTouched[0], null));
 			}
 			setTimeout(function () {
@@ -4675,9 +4678,9 @@ room.onTeamGoal = function(team) {
 		else {
 			var fraseautogol = frasesautogol[(Math.random() * frasesautogol.length) | 0]
 		//	room.sendAnnouncement("🤡 " + getTime(scores) + fraseautogol + lastPlayersTouched[0].name + "! | Velocidade do chute: " + ballSpeed.toPrecision(4).toString() + "km/h " + (team == Team.RED ? "🔴" : "🔵"),null,(team == Team.RED ? Cor.Vermelho : 0x5ec0f1),'bold');
-            room.sendAnnouncement(centerText("🤦‍♂️ IT'S GOOOOOL AGAINST!! 🤦‍♂️"), null, Cor.Yellow, "bold");
-            room.sendAnnouncement(centerText("🤡 Goal from " + lastPlayersTouched[0].name + " 🤡"), null, Cor.White, "bold");
-            room.sendAnnouncement(centerText("Kick speed: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
+            room.sendAnnouncement(centerText("🤦‍♂️ GOOOOLLL!! 🤦‍♂️"), null, Cor.Yellow, "bold");
+            room.sendAnnouncement(centerText("🤡 Gol Geldi: " + lastPlayersTouched[0].name + " 🤡"), null, Cor.White, "bold");
+            room.sendAnnouncement(centerText("Şut Hızı: " + ballSpeed.toPrecision(4).toString() + " km/h"), null, Cor.White, "normal");
 			game.goals.push(new Goal(scores.time, team, null, null));
 			setTimeout(function () {
 				room.setPlayerAvatar(goalMaker, "🤦‍♂️")
@@ -4710,11 +4713,11 @@ room.onRoomLink = function(url) {}
 
 room.onPlayerAdminChange = function(changedPlayer, byPlayer) {
     if (getMute(changedPlayer) && changedPlayer.admin) {
-        room.sendChat(changedPlayer.name + " was unmuted.");
+        room.sendChat(changedPlayer.name + " mutelendi.");
         setMute(changedPlayer, false);
     }
     if (byPlayer.id != 0 && localStorage.getItem(getAuth(byPlayer)) && JSON.parse(localStorage.getItem(getAuth(byPlayer)))[Ss.RL] == "admin") {
-        room.sendChat("You are not allowed to appoint a player as an administrator!", byPlayer.id);
+        room.sendChat("Admini Etiketleme Yetkiniz Yok!", byPlayer.id);
         room.setPlayerAdmin(changedPlayer.id, false);
     }
 }
@@ -4728,11 +4731,7 @@ room.onGameTick = function() {
     handleInactivity();
 }
 
-Botdivulga = setInterval(function() {
-    room.sendAnnouncement("Do you want to create a room, but don't know how to program? We have the solution ☝️🤓", null, 0x5EE7FF, "bold");
-    room.sendAnnouncement("If you like it, consider leaving a ⭐ in our repository\n➡ https://github.com/theosanct0s/haxball-bot", null, 0xFFFFFF, "bold");
-}, BotdivulgaTime);
 
 msg1 = setInterval(function() {
-    room.sendAnnouncement("Here we just play for fun, if you want to be competitive, go to another room!", null, 0xff8a4a, "normal");
+    room.sendAnnouncement("Sadece Yayın ve Eğlence İçin Buradayız!", null, 0xff8a4a, "normal");
 }, msg1Time);
