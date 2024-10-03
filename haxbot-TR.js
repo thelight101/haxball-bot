@@ -1,7 +1,7 @@
 /* ROOM */
-const roomName = "📺🔴Twitch Yayındayız";
-const botName = "Bot 101";
-const maxPlayers = 15; // maximum number of players in the room
+const roomName = "🇹🇷 Nordic Futsal 🇳🇴";
+const botName = "101";
+const maxPlayers = 10; // maximum number of players in the room
 const roomPublic = true; // true = public room | false = players only enter via the room link (it does not appear in the room list)
 const geo = [{"lat": -22.9201, "lon": -43.3307, "code": "br"}, {"code": "FR", "lat": 46.2, "lon": 2.2}, {"code": "PL", "lat": 51.9, "lon": 19.1}, {"code": "GB", "lat": 55.3, "lon": -3.4}, {"code": "PT", "lat": 39.3, "lon": -8.2}]; 
 // place your geoloc, so as not to have a leaky room
